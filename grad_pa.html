@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/darkly/bulmaswatch.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <title>Albert Zhang - AAS 241 Poster</title>
+</head>
+
+<body>
+    <section class="section">
+        <h1 class="title"><span class="block">AAS241 Poster - Albert C. Zhang</span>
+            <button class="button block is-danger is-cassum-orange ml-2" onclick="playall()">
+                <span class="icon is-small">
+                    <i class="fas fa-play"></i>
+                </span>
+                <span>Play All</span>
+            </button>
+            <button class="button block is-warning ml-2" onclick="rewind()">
+                <span class="icon is-small">
+                    <i class="fas fa-step-backward"></i>
+                </span>
+                <span>Rewind All</span>
+            </button>
+        </h1>
+
+        <div class="tile is-ancestor is-vertical">
+            <div class="tile is-parent">
+                <div class="tile is-child is-3">
+                    <h4 class="is-size-4 has-text-centered">35kyr introduction time</h4>
+                    <video class="block" preload="auto" poster="GRAD35K.png" controls>
+                        <source src="GRAD35K.mp4">
+                    </video>
+                </div>
+                <div class="tile is-child is-3">
+                    <h4 class="is-size-4 has-text-centered">35kyr introduction time + Pebble Accretion</h4>
+                    <video class="block" preload="auto" poster="GRAD35K_PA.png" controls>
+                        <source src="GRAD35K_PA.mp4">
+                    </video>
+                </div>
+                <div class="tile is-child is-3">
+                    <h4 class="is-size-4 has-text-centered">350kyr introduction time</h4>
+                    <video class="block" preload="auto" poster="GRAD350K.png" controls>
+                        <source src="GRAD350K.mp4">
+                    </video>
+                </div>
+                <div class="tile is-child is-3">
+                    <h4 class="is-size-4 has-text-centered">350kyr introduction time + Pebble Accretion</h4>
+                    <video class="block" preload="auto" poster="GRAD350K_PA.png" controls>
+                        <source src="GRAD350K_PA.mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <style type="text/css">
+        html,
+        body {
+            background-color: #202020;
+            height: 100%;
+        }
+
+        :root {
+            --cassum-orange: #e77a35;
+        }
+
+        button.is-cassum-orange {
+            background-color: var(--cassum-orange) !important;
+        }
+
+        video {
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 0.75em;
+            display: block;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function playall() {
+            const videos = document.getElementsByTagName("video");
+            for (const video of videos) {
+                video.currentTime = 0;
+                video.play();
+            }
+        }
+
+        function rewind() {
+            const videos = document.getElementsByTagName("video");
+            for (const video of videos) {
+                video.currentTime = 0;
+            }
+        }
+
+        function modal(e) {
+            const h4 = e.target;
+            tile = h4.parentElement;
+
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Functions to open and close a modal
+            function openModal($el) {
+                $el.classList.add('is-active');
+            }
+
+            function closeModal($el) {
+                $el.classList.remove('is-active');
+            }
+
+            function closeAllModals() {
+                (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+                    closeModal($modal);
+                });
+            }
+
+            // Add a click event on buttons to open a specific modal
+            (document.querySelectorAll('h4') || []).forEach(($trigger) => {
+                const $target = document.createElement("div");
+                $target.classList.add("modal");
+                $target.innerHTML = `  <div class="modal-background"></div>
+
+  <div class="modal-content">
+    <div class="box">
+      ${$trigger.parentElement.innerHTML}
+    </div>
+  </div>
+
+  <button class="modal-close is-large" aria-label="close"></button></div>`;
+                document.body.appendChild($target);
+
+                $trigger.addEventListener('click', () => {
+                    openModal($target);
+                });
+            });
+
+            // Add a click event on various child elements to close the parent modal
+            (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+                const $target = $close.closest('.modal');
+
+                $close.addEventListener('click', () => {
+                    closeModal($target);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
