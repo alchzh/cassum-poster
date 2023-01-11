@@ -1,0 +1,28 @@
+html,
+body {
+    background-color: #202020;
+    height: 100%;
+}
+
+:root {
+    --cassum-orange: #e77a35;
+}
+
+button.is-cassum-orange {
+    background-color: var(--cassum-orange) !important;
+}
+
+video {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.75em;
+    display: block;
+}
+
+.modal-content {
+    max-width: 400px;
+}
+
+.modal-content video {
+    max-width: 300px
+}
