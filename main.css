@@ -26,3 +26,8 @@ video {
 .modal-content video {
     max-width: 300px
 }
+
+h4 {
+    text-decoration: underline;
+    cursor: pointer;
+}
